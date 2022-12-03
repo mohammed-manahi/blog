@@ -3,6 +3,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class PublishedManager(models.Manager):
+    # Create custom model manager to query posts that their statuses is published
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Post.Status.PUBLISH)
+
+
 class Post(models.Model):
     class Status(models.TextChoices):
         # Define class for post choices where Post.Status.choices obtains choices and Post.Status.labels obtains names
@@ -20,6 +26,11 @@ class Post(models.Model):
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
     # Define many-to-one relationship with user model
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+
+    # Default model manager, when adding custom manager it has to be explicitly defined
+    objects = models.Manager()
+    # Custom model manager for getting posts that their statuses is published
+    published = PublishedManager()
 
     class Meta:
         # Order posts by publish field descendingly
