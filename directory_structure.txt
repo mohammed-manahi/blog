@@ -1,0 +1,24 @@
+.
+|-- blog
+|   |-- asgi.py
+|   |-- __init__.py
+|   |-- settings.py
+|   |-- urls.py
+|   `-- wsgi.py
+|-- directory_structure.txt
+|-- main
+|   |-- admin.py
+|   |-- apps.py
+|   |-- __init__.py
+|   |-- migrations
+|   |   |-- 0001_initial.py
+|   |   `-- __init__.py
+|   |-- models.py
+|   |-- tests.py
+|   `-- views.py
+|-- manage.py
+|-- Pipfile
+|-- Pipfile.lock
+`-- requirements.txt
+
+3 directories, 18 files
