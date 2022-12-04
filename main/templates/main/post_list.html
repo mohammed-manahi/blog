@@ -15,5 +15,7 @@
         </p>
         {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
-    {% include "pagination.html" with page=post_list %}
+    {#{% include "pagination.html" with page=post_list %}#}
+    {#  Use the below include when class-based view is used in the views  #}
+    {% include "pagination.html" with page=page_obj %}
 {% endblock %}
