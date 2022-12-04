@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from main.models import Post
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 
 
 def post_list(request):
@@ -9,7 +9,10 @@ def post_list(request):
     # Use paginator to split content on pages
     paginator = Paginator(posts, 3)
     page_number = request.GET.get("page", 1)
-    post_list = paginator.page(page_number)
+    try:
+        post_list = paginator.page(page_number)
+    except EmptyPage:
+        post_list = paginator.page(page_number.num_pages)
     template = "main/post_list.html"
     # Use paginated post list in the context
     context = {"post_list": post_list}
