@@ -6,5 +6,6 @@ app_name = "main"
 urlpatterns = [
     # Define url patterns for post list and post detail views
     path("", views.post_list, name="post_list"),
-    path("<int:pk>/", views.post_detail, name="post_detail"),
+    # Make urls seo friendly by using date and slug combination in the post detail url
+    path("<int:day>/<int:month>/<int:year>/<slug:post>/", views.post_detail, name="post_detail"),
 ]
