@@ -9,4 +9,6 @@ urlpatterns = [
     path("", views.PostListView.as_view(), name="post_list"),
     # Make urls seo friendly by using date and slug combination in the post detail url
     path("<int:day>/<int:month>/<int:year>/<slug:post>/", views.post_detail, name="post_detail"),
+    # Define post share url
+    path("<int:post_pk>/share/", views.post_share, name="post_share")
 ]

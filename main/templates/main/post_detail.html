@@ -6,10 +6,14 @@
         Published {{ post.publish }} by {{ post.author }}
     </p>
     {{ post.body|linebreaks }}
-
-    <h2>
-        <a href="{% url 'main:post_list' %}">
-            All posts
+    <p>
+        <a href="{% url "main:post_share" post.id %}">
+            Share this post
         </a>
-    </h2>
+    </p>
+    <h4>
+        <a href="{% url 'main:post_list' %}">
+            Home
+        </a>
+    </h4>
 {% endblock %}
