@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # add blog app to project
+    # Add blog app to project
     'main',
+    # Add taggit third-party app tp enable tag feature
+    'taggit',
 ]
 
 MIDDLEWARE = [

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from taggit.managers import TaggableManager
 
 class PublishedManager(models.Manager):
     # Create custom model manager to query posts that their statuses is published
@@ -28,6 +28,8 @@ class Post(models.Model):
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
     # Define many-to-one relationship with user model
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    # Add taggit manager to enable post tags
+    tags = TaggableManager()
 
     # Default model manager, when adding custom manager it has to be explicitly defined
     objects = models.Manager()

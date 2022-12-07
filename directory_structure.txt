@@ -2,23 +2,48 @@
 |-- blog
 |   |-- asgi.py
 |   |-- __init__.py
+|   |-- __pycache__
+|   |   |-- __init__.cpython-311.pyc
+|   |   |-- settings.cpython-311.pyc
+|   |   `-- urls.cpython-311.pyc
 |   |-- settings.py
 |   |-- urls.py
 |   `-- wsgi.py
+|-- database_design.png
 |-- directory_structure.txt
 |-- main
 |   |-- admin.py
 |   |-- apps.py
+|   |-- forms.py
 |   |-- __init__.py
 |   |-- migrations
 |   |   |-- 0001_initial.py
+|   |   |-- 0002_alter_post_slug.py
+|   |   |-- 0003_comment_comment_main_commen_created_7f3688_idx.py
+|   |   |-- 0004_post_tags.py
 |   |   `-- __init__.py
 |   |-- models.py
+|   |-- __pycache__
+|   |   |-- apps.cpython-311.pyc
+|   |   `-- __init__.cpython-311.pyc
+|   |-- static
+|   |   `-- css
+|   |       `-- styles.css
+|   |-- templates
+|   |   |-- base.html
+|   |   |-- comment_form.html
+|   |   |-- main
+|   |   |   |-- post_comment.html
+|   |   |   |-- post_detail.html
+|   |   |   |-- post_list.html
+|   |   |   `-- post_share.html
+|   |   `-- pagination.html
 |   |-- tests.py
+|   |-- urls.py
 |   `-- views.py
 |-- manage.py
 |-- Pipfile
 |-- Pipfile.lock
 `-- requirements.txt
 
-3 directories, 18 files
+9 directories, 37 files
