@@ -7,29 +7,35 @@ from django.core.mail import send_mail, BadHeaderError
 from django.views.decorators.http import require_POST
 from main.models import Post, Comment
 from main.forms import EmailPostForm, CommentForm
+from taggit.models import Tag
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-# def post_list(request):
-#     # Create post list to fetch all published posts
-#     posts = Post.published.all()
-#     # Use paginator to split content on pages
-#     paginator = Paginator(posts, 3)
-#     page_number = request.GET.get("page", 1)
-#     try:
-#         post_list = paginator.page(page_number)
-#     except PageNotAnInteger:
-#         # Handle page is not an integer exception
-#         post_list = paginator.page(1)
-#     except EmptyPage:
-#         # Handle empty page exception
-#         post_list = paginator.page(page_number.num_pages)
-#     template = "main/post_list.html"
-#     # Use paginated post list in the context
-#     context = {"post_list": post_list}
-#     return render(request, template, context)
+def post_list(request, tag_slug=None):
+    # Create post list to fetch all published posts
+    posts = Post.published.all()
+    tag = None
+    if tag_slug:
+        # Get post tags if there are any tag and filter using the list of tags
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = posts.filter(tags__in=[tag])
+    # Use paginator to split content on pages
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get("page", 1)
+    try:
+        post_list = paginator.page(page_number)
+    except PageNotAnInteger:
+        # Handle page is not an integer exception
+        post_list = paginator.page(1)
+    except EmptyPage:
+        # Handle empty page exception
+        post_list = paginator.page(page_number.num_pages)
+    template = "main/post_list.html"
+    # Use paginated post list in the context
+    context = {"post_list": post_list, "tag": tag}
+    return render(request, template, context)
 
 
 def post_detail(request, day, month, year, post):
@@ -44,13 +50,13 @@ def post_detail(request, day, month, year, post):
     return render(request, template, context)
 
 
-class PostListView(ListView):
-    # Create class-based view for post list
-    queryset = Post.published.all()
-    paginate_by = 3
-    # Use context object name, if not set default is object list
-    context_object_name = "post_list"
-    template_name = "main/post_list.html"
+# class PostListView(ListView):
+#     # Create class-based view for post list
+#     queryset = Post.published.all()
+#     paginate_by = 3
+#     # Use context object name, if not set default is object list
+#     context_object_name = "post_list"
+#     template_name = "main/post_list.html"
 
 
 def post_share(request, post_pk):
