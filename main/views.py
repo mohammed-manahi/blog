@@ -4,8 +4,9 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.core.mail import send_mail, BadHeaderError
-from main.models import Post
-from main.forms import EmailPostForm
+from django.views.decorators.http import require_POST
+from main.models import Post, Comment
+from main.forms import EmailPostForm, CommentForm
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,8 +36,11 @@ def post_detail(request, day, month, year, post):
     # Create post detail for seo friendly urls
     post = get_object_or_404(Post, status=Post.Status.PUBLISH, publish__day=day, publish__month=month,
                              publish__year=year, slug=post)
+    # Include post comments if any and render the comment form
+    comments = post.comments.filter(active=True)
+    form = CommentForm()
     template = "main/post_detail.html"
-    context = {"post": post}
+    context = {"post": post, "comments": comments, "form": form}
     return render(request, template, context)
 
 
@@ -72,4 +76,21 @@ def post_share(request, post_pk):
         form = EmailPostForm()
     template = "main/post_share.html"
     context = {"form": form, "post": post, "sent": sent}
+    return render(request, template, context)
+
+
+@require_POST
+def post_comment(request, post_pk):
+    # Create post comment view and use require post to allow post request only
+    post = get_object_or_404(Post, pk=post_pk, status=Post.Status.PUBLISH)
+    # Set comment variable to none to indicate whether added or to render comment form
+    comment = None
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        # Don't save until setting a post for the comment first
+        comment.post = post
+        comment.save()
+    template = "main/post_comment.html"
+    context = {"post": post, "form": form, "comment": comment}
     return render(request, template, context)
