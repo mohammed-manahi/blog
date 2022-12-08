@@ -21,14 +21,28 @@
     <h2>My blog</h2>
     <p>
         This is my blog.
-        The blog contains {% total_posts %} posts so far.
+        The blog contains {% get_total_posts %} posts so far.
     </p>
     <h4>
         {# Custom tag for latest posts that take a number of latest post and defined in template tags #}
-        Latest Posts {% latest_posts 3 %}
+        Latest Posts {% get_latest_posts 3 %}
     </h4>
+    <h4>Most commented posts
+        <ul>
+            {# Store the result of the template tag in a new variable "most_commented_posts #}
+            {% get_most_commented_posts as most_commented_posts %}
+            {% for post in most_commented_posts %}
+                <li>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </h4>
+    <p>
+        <a href="{% url 'main:post_list' %}">
+            Home
+        </a>
+    </p>
 </div>
-{% block footer %}
-{% endblock %}
 </body>
 </html>

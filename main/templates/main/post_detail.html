@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <h1>{{ post.title }}</h1>
+    <h1>{{ post.title|title }}</h1>
     <p class="date">
         Published {{ post.publish }} by {{ post.author }}
     </p>
@@ -14,7 +14,7 @@
     <h3>Similar posts</h3>
     {% for post in similar_posts %}
         <p>
-            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            <a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
         </p>
     {% empty %}
         There are no similar posts yet.
@@ -35,11 +35,4 @@
         <p>There are no comments.</p>
     {% endfor %}
     {% include "comment_form.html" %}
-{% endblock %}
-{% block footer %}
-    <p>
-        <a href="{% url 'main:post_list' %}">
-            Home
-        </a>
-    </p>
 {% endblock %}

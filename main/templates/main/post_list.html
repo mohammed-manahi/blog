@@ -11,7 +11,7 @@
             {#        {{ post.title }}#}
             {#    </a>#}
             {# Replace url with canonical url #}
-            <a href="{{ post.get_absolute_url }}"> {{ post.title }}</a>
+            <a href="{{ post.get_absolute_url }}"> {{ post.title|title }}</a>
         </h2>
         <p class="tags">
             Tags:
