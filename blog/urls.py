@@ -17,11 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from main.sitemaps import PostSitemap
+
+sitemaps = {"posts": PostSitemap}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Add main app's url to the project urls
     path("main/", include("main.urls", namespace="main")),
+    # Define site map url mapper
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
 ]
 
 if settings.DEBUG:

@@ -30,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Add site id to enable site maps
+SITE_ID = 1
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +46,10 @@ INSTALLED_APPS = [
     'main',
     # Add taggit third-party app tp enable tag feature
     'taggit',
+    # Add sites and sitemaps to enable site maps
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
 ]
 
 MIDDLEWARE = [
