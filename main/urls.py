@@ -1,5 +1,6 @@
 from django.urls import path
 from main import views
+from main.feeds import LatestPostsFeed
 
 app_name = "main"
 
@@ -15,5 +16,7 @@ urlpatterns = [
     path("<int:post_pk>/share/", views.post_share, name="post_share"),
     # Define post comment url
     path("<int:post_pk>/comment/", views.post_comment, name="post_comment"),
+    # Define rss feed url
+    path("feed/", LatestPostsFeed(), name="post_feed")
 
 ]
