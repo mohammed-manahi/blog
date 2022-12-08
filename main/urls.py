@@ -17,6 +17,7 @@ urlpatterns = [
     # Define post comment url
     path("<int:post_pk>/comment/", views.post_comment, name="post_comment"),
     # Define rss feed url
-    path("feed/", LatestPostsFeed(), name="post_feed")
-
+    path("feed/", LatestPostsFeed(), name="post_feed"),
+    # Define search url
+    path('search/', views.post_search, name="post_search"),
 ]

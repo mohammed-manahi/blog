@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     # Add sites and sitemaps to enable site maps
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    # Add postgres app to enable advanced text search feature
+    'django.contrib.postgres',
 
 ]
 

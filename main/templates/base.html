@@ -19,6 +19,9 @@
 </div>
 <div id="sidebar">
     <h2>My blog</h2>
+    <p><a href="{% url 'main:post_list' %}">Home</a></p>
+    <p><a href="{% url 'main:post_search' %}">Search</a></p>
+    <p><a href="{% url "main:post_feed" %}">Subscribe to RSS feed</a></p>
     <p>
         This is my blog.
         The blog contains {% get_total_posts %} posts so far.
@@ -27,11 +30,6 @@
         {# Custom tag for latest posts that take a number of latest post and defined in template tags #}
         Latest Posts {% get_latest_posts 3 %}
     </h4>
-    <p>
-        <a href="{% url "main:post_feed" %}">
-            Subscribe to my RSS feed
-        </a>
-    </p>
     <h4>Most commented posts
         <ul>
             {# Store the result of the template tag in a new variable "most_commented_posts #}
@@ -43,11 +41,6 @@
             {% endfor %}
         </ul>
     </h4>
-    <p>
-        <a href="{% url 'main:post_list' %}">
-            Home
-        </a>
-    </p>
 </div>
 </body>
 </html>
