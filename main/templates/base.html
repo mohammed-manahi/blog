@@ -23,6 +23,10 @@
         This is my blog.
         The blog contains {% total_posts %} posts so far.
     </p>
+    <h4>
+        {# Custom tag for latest posts that take a number of latest post and defined in template tags #}
+        Latest Posts {% latest_posts 3 %}
+    </h4>
 </div>
 {% block footer %}
 {% endblock %}
