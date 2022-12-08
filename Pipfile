@@ -10,6 +10,7 @@ python-dotenv = "*"
 sqlparse = "*"
 pep8 = "*"
 django-taggit = "*"
+markdown = "*"
 
 [dev-packages]
 
